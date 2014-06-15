@@ -86,6 +86,27 @@ class User_model extends CI_Model {
         $this->db->delete(self::TABLE_NAME, $where);
         return $this->db->affected_rows();
     }
+
+    /**
+     * Checks if the user and password combo exists in the database
+     *
+     * @param String $user with the username .
+     * @param String $pass with the username password.
+     * @return Array with the data associated to the username password combo, or null if not found.
+     */
+    public function check($user, $pass){
+
+        $sql = "SELECT id,group_id,country_id,name,lastname_f,lastname_m
+                FROM users
+                WHERE username = '$user' AND password = '$pass'";
+        $qry = $this->db->query($sql);
+        $response = $qry->row_array();
+        if($response!=null){
+            return $response;
+        }
+        else
+            return null;
+    }
 }
 
      
