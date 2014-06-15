@@ -57,6 +57,51 @@
 	    	$this->layout->view('/user/register');
 	    }
 
+	    function checkRegister(){
+	    	if($_POST){
+	    		$username = $_POST['username'];
+
+	    		$response_usr = $this->user_model->get($username);
+
+	    		if($response_usr){
+
+	    			$data['error'] = 2;
+	    			$this->layout->view('/user/register',$data);
+
+	    		} else {
+
+	    			$mail = $_POST['mail'];
+	    			$response_ml = $this->use_model->get($mail);
+
+	    			if($response_ml){
+
+	    				$data['error'] = 2;
+	    				$this->layout->view('/user/register',$data);
+
+	    			} else {
+
+	    				$test = $this->user_model->insert($_POST);
+
+	    				if(!$test){
+
+	    					$data['error'] = 4;
+	    					$this->layout->view('/user/register',$data);
+
+	    				} else {
+
+	    					$data['error'] = 0;
+	    					$this->layout->view('/user/register',$data);
+	    					
+	    				}
+	    			}
+	    		}
+	    	}
+	    	else{
+	    		$data['error'] = 1;
+	    		$this->layout->view('/user/register',$data);
+	    	}
+	    }
+
 	    function logout(){
 	    	$this->session_destroy();
 	    	$this->layout->view('/user/login');
