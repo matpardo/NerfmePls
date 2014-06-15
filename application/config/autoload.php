@@ -54,7 +54,6 @@ $autoload['packages'] = array();
 
 $autoload['libraries'] = array('database','session','encrypt');
 
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Helper Files
