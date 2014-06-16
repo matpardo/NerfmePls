@@ -8,6 +8,9 @@
 	    }
 	
 	    function index() {
+			if(! isset($data['name'])){
+	    		redirect('/user/', 'refresh');
+	    	}
 			//Titulo de la página de la vista
 			$data['title_for_layout'] = 'Bienvenido';
 						
@@ -18,6 +21,9 @@
 	    }
 
 	    function add() {
+			if(! isset($data['name'])){
+	    		redirect('/user/', 'refresh');
+	    	}
 			//Titulo de la página de la vista
 			$data['title_for_layout'] = 'Bienvenido';
 						
@@ -55,6 +61,10 @@
 	    }
 
 	    function view($id = null) {
+			if(! isset($data['name'])){
+	    		redirect('/user/', 'refresh');
+	    	}
+
 			$this->load->model('Element_model','Element',TRUE);
 	    	
 	    	if($this->Element->exist($id) == 0){
@@ -110,6 +120,9 @@
 	    }
 
 	    function restaurant($country_id = null) {
+			if(! isset($data['name'])){
+	    		redirect('/user/', 'refresh');
+	    	}
 			//Titulo de la página de la vista
 			$data['title_for_layout'] = 'Restaurantes';
 						
@@ -126,6 +139,9 @@
 	    }
 
 	    function rent($country_id = null) {
+			if(! isset($data['name'])){
+	    		redirect('/user/', 'refresh');
+	    	}
 			//Titulo de la página de la vista
 			$data['title_for_layout'] = 'Hoteles/Alquileres';
 						
@@ -142,6 +158,9 @@
 	    }
 
 	     function places($country_id = null) {
+			if(! isset($data['name'])){
+	    		redirect('/user/', 'refresh');
+	    	}
 			//Titulo de la página de la vista
 			$data['title_for_layout'] = 'Tour';
 						

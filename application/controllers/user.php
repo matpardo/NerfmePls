@@ -71,6 +71,9 @@
 	    }
 
 	    function register(){
+	    	if(isset($data['name'])){
+	    		redirect('/element/', 'refresh');
+	    	}
 	    	$this->layout->setLayout('layout_login');
 	    	$data['sexes_option'] = $this->sexes_model->get_assoc_array();
 	    	$data['country_option'] = $this->country_model->get_assoc_array();
@@ -131,6 +134,10 @@
 	    }
 
 	    function profile_data(){
+	    	if(! isset($data['name'])){
+	    		redirect('/user/', 'refresh');
+	    	}
+
 	    	$userdata = $this->session->all_userdata();
 	    	if(isset($userdata['id'])){
 	    		$data = $this->user_model->get_array($userdata['id']);
@@ -152,6 +159,10 @@
 	    }
 
 	    function admin(){
+	    	if(! isset($data['name'])){
+	    		redirect('/user/', 'refresh');
+	    	}
+	    	
 	    	$userdata = $this->session->all_userdata();
 	    	if(isset($userdata['id']) && isset($userdata['group_id']) && $userdata['group_id'] == 1){
 	    		$data['travelers_option'] = $this->user_model->get_assoc_array_travelers();
