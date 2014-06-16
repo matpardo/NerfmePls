@@ -160,11 +160,14 @@
 	    	
 			$data_ue = array('elements_id' => $id);
 			$data_el = array('id' => $id);
+			$data_cm = array('element_id' => $id);
 
 			$this->load->model('User_Element_model','UserElement',TRUE);
 			$this->load->model('Element_model','Element',TRUE);
+			$this->load->model('Comment_model','Comment',TRUE);
 			
 			$this->UserElement->delete($data_ue);
+			$this->Comment->delete($data_cm);
 			$this->Element->delete($data_el);
 
 	    	redirect($_SERVER['HTTP_REFERER'], 'refresh');

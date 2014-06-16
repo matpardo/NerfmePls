@@ -22,6 +22,15 @@ class Comment_model extends CI_Model {
         }
     }
 
+     public function delete($where = array()) {
+        if (!is_array($where)) {
+            $where = array(self::PRI_INDEX => $where);
+        }
+        $this->db->delete(self::TABLE_NAME, $where);
+        return $this->db->affected_rows();
+    }
+
+
     /**
      * Retrieves record(s) from the database as an array
      *
