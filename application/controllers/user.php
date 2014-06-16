@@ -139,7 +139,7 @@
 	    	if($_POST){
 	    		$this->user_model->changePass($_POST['id'],$_POST['password']);
 	    	}
-	    	redirect('/user/profile', 'refresh');
+	    	redirect('/user/profile_data', 'refresh');
 	    }
 
 	    function logout(){
