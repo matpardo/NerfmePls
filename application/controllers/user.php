@@ -124,9 +124,9 @@
 	    function profile_data(){
 	    	$userdata = $this->session->all_userdata();
 	    	if(isset($userdata['id'])){
-	    		$data = $this->user_model->get_userdata($userdata['id']);
-	    		$data['sex_name']=$this->sexes_model->get_name($data['sex_id']);
-	    		$data['country_name']=$this->country_model->get_name($data['country_id']);
+	    		$data = $this->user_model->get_array($userdata['id']);
+	    		$data['sex_name']=$this->sexes_model->get_assoc_array()[$data['sex_id']];
+	    		$data['country_name']=$this->country_model->get_assoc_array()[$data['country_id']];
 	    		$this->layout->view('/user/profile',$data);
 
 	    	} else {

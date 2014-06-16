@@ -153,19 +153,6 @@ class User_model extends CI_Model {
             return FALSE;
     }
 
-    public function get_userdata($id){
-        $sql = "SELECT *
-                FROM users
-                WHERE id = '$id'";
-        $qry = $this->db->query($sql);
-        $response = $qry->result_array();
-        if($response!=null){
-            return $response;
-        }
-        else
-            return null;
-    }
-
     function changePass($id,$password){
         $data = array(
                 'password' => $password
