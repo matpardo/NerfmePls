@@ -87,5 +87,20 @@
 	        $this->db->delete(self::TABLE_NAME, $where);
 	        return $this->db->affected_rows();
 	    }
+
+	    public function get_country_id($code = null){
+	    	$this->db->select('*');
+	        $this->db->from(self::TABLE_NAME);
+	    	$this->db->where('code', $code);
+
+			$result = $this->db->get()->row_array();
+	    	
+			if(empty($result)){
+				return 7;
+			}
+			else{
+				return $result['id'];
+			}	    	
+	    }
 	}
 

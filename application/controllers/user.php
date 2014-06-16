@@ -15,7 +15,7 @@
 	    function index() {
 	    	$data = $this->session->all_userdata();
 	    	if(isset($data['name'])){
-	    		$this->layout->view('/user/home', $data);
+	    		redirect('/element/', 'refresh');
 	    	} else 
 	    		$this->layout->view('/user/login');
 
@@ -33,19 +33,32 @@
 	    	$response = $this->user_model->check($user,$pass);
 
 	    	if($response != null){
+	    		//obtenemos el ip del visitante
+				//$ip = $_SERVER['REMOTE_ADDR'];
+				//de prueba pondremos una ip chilena
+				$ip='200.9.100.75';
+				$location = json_decode(file_get_contents('http://freegeoip.net/json/'.$ip));
+				
+				//obtenemos el codigo de país
+				$country_code = $location->country_code;
+				$this->load->model('Country_model','Country',TRUE);
+
+				$visit_id = $this->Country->get_country_id($country_code);
+				
 	    		$data = array(
 	    				'id' => $response['id'],
 	    				'group_id' => $response['group_id'],
 	    				'country_id' => $response['country_id'],
 	    				'name' => $response['name'],
 	    				'lastname_f' => $response['lastname_f'],
-	    				'lastname_m' => $response['lastname_m']);
+	    				'lastname_m' => $response['lastname_m'],
+	    				'visit_id' => $visit_id);
 
 	    		$this->session->set_userdata($data);
 
 	    		$data = $this->session->all_userdata();
 
-	    		$this->layout->view('/user/home', $data);
+	    		redirect('/element/', 'refresh');
 	    	}
 	    	else{
 	    		$data['error'] = TRUE;
@@ -103,8 +116,8 @@
 	    }
 
 	    function logout(){
-	    	$this->session_destroy();
-	    	$this->layout->view('/user/login');
+	    	$this->session->sess_destroy();
+	    	redirect('/user/', 'refresh');
 	    }
 	}
 	        
