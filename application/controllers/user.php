@@ -19,6 +19,7 @@
 	    	if(isset($data['name'])){
 	    		redirect('/element/', 'refresh');
 	    	} else 
+	    		$this->layout->setLayout('layout_login');
 	    		$this->layout->view('/user/login');
 
 			/*
@@ -64,6 +65,7 @@
 	    	}
 	    	else{
 	    		$data['error'] = TRUE;
+	    		$this->layout->setLayout('layout_login');
 	    		$this->layout->view('/user/login',$data);
 	    	}
 	    }
