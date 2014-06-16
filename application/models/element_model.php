@@ -103,7 +103,7 @@ class Element_model extends CI_Model {
      * @return int Number of rows affected by the delete query
      */
     public function delete($where = array()) {
-        if (!is_array()) {
+        if (!is_array($where)) {
             $where = array(self::PRI_INDEX => $where);
         }
         $this->db->delete(self::TABLE_NAME, $where);
@@ -115,6 +115,21 @@ class Element_model extends CI_Model {
         $query = $this->db->query($sql, array($id));   
         return $query->num_rows();
     }
+
+    public function get_elements_by_country($country_id = null, $section_id = null){
+        $sql = "SELECT * FROM 
+                    (SELECT elements.id,elements.name,price 
+                            FROM elements INNER JOIN countries on elements.country_id = countries.id 
+                                    WHERE country_id = ? AND section_id = ? ) as elements
+                    LEFT JOIN
+                    (SELECT elements_id,count(*) as num_likes from users_elements GROUP BY elements_id) as likes 
+                     ON likes.elements_id = elements.id 
+                     ORDER BY num_likes DESC";
+        $query = $this->db->query($sql,array($country_id,$section_id));
+        
+        return $query->result_array();             
+    }
+
 }
 
      

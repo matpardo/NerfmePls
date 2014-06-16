@@ -53,6 +53,17 @@ class User_Element_model extends CI_Model {
         }
     }
 
+    /**
+     * Deletes specified record from the database
+     *
+     * @param Array $where Optional. Associative array field_name=>value, for where condition. If specified, $id is not used
+     * @return int Number of rows affected by the delete query
+     */
+    public function delete($where = array()) {        
+        $this->db->delete(self::TABLE_NAME, $where);
+        return $this->db->affected_rows();
+    }
+
 /**
  * Count how many likes has the element
  * @param  [type] $id [element_id]

@@ -70,6 +70,68 @@
 
 	    	redirect('/element/view/'.$data['elements_id'], 'refresh');
 	    }
+
+	    function restaurant($country_id = null) {
+			//Titulo de la página de la vista
+			$data['title_for_layout'] = 'Restaurantes';
+						
+			$this->load->model('Country_model','Country',TRUE);
+			$this->load->model('Element_model','Element',TRUE);
+			
+			$data['Countries'] = $this->Country->get_assoc_array();
+			
+			if(!is_null($country_id)){
+				$data['Elements'] = $this->Element->get_elements_by_country($country_id,2);
+			}
+			//echo '<pre>'. print_r($data,1).'</pre>';	
+	        $this->layout->view('/Element/restaurant',$data);
+	    }
+
+	    function rent($country_id = null) {
+			//Titulo de la página de la vista
+			$data['title_for_layout'] = 'Hoteles/Alquileres';
+						
+			$this->load->model('Country_model','Country',TRUE);
+			$this->load->model('Element_model','Element',TRUE);
+			
+			$data['Countries'] = $this->Country->get_assoc_array();
+			
+			if(!is_null($country_id)){
+				$data['Elements'] = $this->Element->get_elements_by_country($country_id,1);
+			}
+			//echo '<pre>'. print_r($data,1).'</pre>';	
+	        $this->layout->view('/Element/rent',$data);
+	    }
+
+	     function places($country_id = null) {
+			//Titulo de la página de la vista
+			$data['title_for_layout'] = 'Tour';
+						
+			$this->load->model('Country_model','Country',TRUE);
+			$this->load->model('Element_model','Element',TRUE);
+			
+			$data['Countries'] = $this->Country->get_assoc_array();
+			
+			if(!is_null($country_id)){
+				$data['Elements'] = $this->Element->get_elements_by_country($country_id,3);
+			}
+			//echo '<pre>'. print_r($data,1).'</pre>';	
+	        $this->layout->view('/Element/places',$data);
+	    }
+
+	    function remove($id = null) {
+	    	
+			$data_ue = array('elements_id' => $id);
+			$data_el = array('id' => $id);
+
+			$this->load->model('User_Element_model','UserElement',TRUE);
+			$this->load->model('Element_model','Element',TRUE);
+			
+			$this->UserElement->delete($data_ue);
+			$this->Element->delete($data_el);
+
+	    	redirect($_SERVER['HTTP_REFERER'], 'refresh');
+	    }	 
 	}
 	        
 

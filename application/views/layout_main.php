@@ -9,7 +9,14 @@
     <?php echo link_tag('assets/css/bootstrap.min.css'); ?>
     <?php echo link_tag('assets/css/home.css'); ?>
     <?php echo link_tag('assets/css/font-awesome.min.css'); ?>
+    <?php echo link_tag('assets/css/select2-bootstrap.css'); ?>
+    <?php echo link_tag('assets/css/select2.css'); ?>
     
+    <?php echo script_tag('assets/js/jquery-2.1.0.min.js'); ?>
+    <?php echo script_tag('assets/js/bootstrap.min.js'); ?>
+    <?php echo script_tag('assets/js/bootbox.min.js'); ?>
+    <?php echo script_tag('assets/js/select2.min.js'); ?>
+    <?php echo script_tag('assets/js/select2_locale_es.js'); ?>
   </head>
   <body> 
    <!-- Fixed navbar -->
@@ -25,10 +32,10 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="home.php">Inicio</a></li>
-          <li><a href="places.php">Tours</a></li>
-          <li><a href="rent.php">Hoteles/Alquileres</a></li>
-          <li><a href="restaurant.php">Restaurantes</a></li>
+          <li><?php echo anchor('element/', 'Inicio', array('title' => 'Inicio')); ?></li>
+          <li><?php echo anchor('element/places/', 'Tours', array('title' => 'Tours')); ?></li>
+          <li><?php echo anchor('element/rent/', 'Hoteles/Alquileres', array('title' => 'Hoteles/Alquileres')); ?></li>
+          <li><?php echo anchor('element/restaurant/', 'Restaurantes', array('title' => 'Restaurantes')); ?></li>
           
           <?php //if ($_SESSION['Auth']['User']['group_id'] == 1): ?>
           <li><a href="admin.php">Administrar</a></li>  
@@ -57,10 +64,6 @@
     </p>                      
   </div>
 </div>
-
-<?php echo script_tag('assets/js/jquery-2.1.0.min.js'); ?>
-<?php echo script_tag('assets/js/bootstrap.min.js'); ?>
-<?php echo script_tag('assets/js/bootbox.min.js'); ?>
 
 </body>
 </html>
