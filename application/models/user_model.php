@@ -139,6 +139,40 @@ class User_model extends CI_Model {
             return false;
         }
     }
+
+    public function exist($fieldname,$value){
+        $sql = "SELECT id
+                FROM users
+                WHERE '$fieldname' = '$value'";
+        $qry = $this->db->query($sql);
+        $response = $qry->row_array();
+        if($response!=null){
+            return TRUE;
+        }
+        else
+            return FALSE;
+    }
+
+    public function get_userdata($id){
+        $sql = "SELECT *
+                FROM users
+                WHERE id = '$id'";
+        $qry = $this->db->query($sql);
+        $response = $qry->result_array();
+        if($response!=null){
+            return $response;
+        }
+        else
+            return null;
+    }
+
+    function changePass($id,$password){
+        $data = array(
+                'password' => $password
+                );
+        $this->db->where('id', $id);
+        $this->db->update(self::TABLE_NAME,$data);
+    }
 }
 
      

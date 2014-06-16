@@ -80,7 +80,7 @@
 	    	if($_POST){
 	    		$username = $_POST['username'];
 
-	    		$response_usr = $this->user_model->get($username);
+	    		$response_usr = $this->user_model->exist('username',$username);
 
 	    		if($response_usr){
 
@@ -90,15 +90,15 @@
 	    		} else {
 
 	    			$mail = $_POST['mail'];
-	    			$response_ml = $this->user_model->get($mail);
+	    			$response_ml = $this->user_model->exist('mail',$mail);
 
 	    			if($response_ml){
 
-	    				$data['error'] = 2;
+	    				$data['error'] = 3;
 	    				$this->layout->view('/user/register',$data);
 
 	    			} else {
-
+	    				array_pop($_POST);
 	    				$test = $this->user_model->insert($_POST);
 
 	    				if(!$test){
@@ -119,6 +119,27 @@
 	    		$data['error'] = 1;
 	    		$this->layout->view('/user/register',$data);
 	    	}
+	    }
+
+	    function profile_data(){
+	    	$userdata = $this->session->all_userdata();
+	    	if(isset($userdata['id'])){
+	    		$data = $this->user_model->get_userdata($userdata['id']);
+	    		$data['sex_name']=$this->sexes_model->get_name($data['sex_id']);
+	    		$data['country_name']=$this->country_model->get_name($data['country_id']);
+	    		$this->layout->view('/user/profile',$data);
+
+	    	} else {
+	    		$this->layout->setLayout('layout_login');
+	    		$this->layout->view('/user/login');
+	    	}
+	    }
+
+	    function changePass(){
+	    	if($_POST){
+	    		$this->user_model->changePass($_POST['id'],$_POST['password']);
+	    	}
+	    	redirect('/user/profile', 'refresh');
 	    }
 
 	    function logout(){

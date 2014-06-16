@@ -153,5 +153,18 @@
 	            return false;
 	        }
 		}
+
+		public function get_name($id){
+	    	$this->db->select('*');
+	    	$this->db->from(self::TABLE_NAME);
+	    	$this->db->where('id', $id);
+
+	    	$result = $this->db->get()->row_array();
+	    	if(empty($result)){
+	    		return null;
+	    	}
+	    	else
+	    		return $result['id'];
+	    }
 }
 
