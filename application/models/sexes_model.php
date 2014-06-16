@@ -87,5 +87,23 @@
 	        $this->db->delete(self::TABLE_NAME, $where);
 	        return $this->db->affected_rows();
 	    }
+
+	    public function get_assoc_array(){
+	    	$sql = "SELECT id, name
+                FROM sexes";
+        $qry = $this->db->query($sql);
+        $response = $qry->result_array();
+        if($response!=null){
+            $sexes_id = array();
+	    	$sexes_name = array();
+	    	foreach ($response as $row) {
+	    		array_push($sexes_id, $row['id']);
+	    		array_push($sexes_name, $row['name']);
+	    	}
+	    	return array_combine($sexes_id, $sexes_name);        
+	    }
+        else
+            return null;
+	    }
 	}
 	        

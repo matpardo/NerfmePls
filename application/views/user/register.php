@@ -37,13 +37,24 @@
 			echo form_input('username')."\n"."<br>";
 			echo form_label('Password', 'pass')."\n";
 			echo form_password('password')."\n"."<br>";
-		
-	
+			echo form_label('Nombre', 'name')."\n";
+			echo form_input('name')."\n"."<br>";
+			echo form_label('Apellido Paterno', 'lastname_f')."\n";
+			echo form_input('lastname_f')."\n"."<br>";
+			echo form_label('Apellido Materno', 'lastname_m')."\n";
+			echo form_input('lastname_m')."\n"."<br>";
+			echo form_label('Sexo', 'sex')."\n";
+			echo form_dropdown('sex_id', $sexes_option, $sexes_option['1'])."<br>";
+			echo form_label('País', 'country')."\n";
+			echo form_dropdown('country_id', $country_option, $country_option['1'])."<br>";
+			echo form_label('E-mail', 'mail')."\n";
+			echo form_input('mail')."\n"."<br>";
+			
 			echo form_submit('send', 'Registrar');
 			echo form_close();
 
 			echo "<br>";
-			echo anchor('User/register', 'Registrar');
+			echo anchor('User/login', 'Ir a login');
 		?>
 	</body>
 </html>

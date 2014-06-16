@@ -102,5 +102,23 @@
 				return $result['id'];
 			}	    	
 	    }
+
+	    public function get_assoc_array(){
+	    	$sql = "SELECT id, name
+                FROM countries";
+        $qry = $this->db->query($sql);
+        $response = $qry->result_array();
+        if($response!=null){
+            $country_id = array();
+	    	$country_name = array();
+	    	foreach ($response as $row) {
+	    		array_push($country_id, $row['id']);
+	    		array_push($country_name, $row['name']);
+	    	}
+	    	return array_combine($country_id, $country_name);        
+	    }
+        else
+            return null;
+	    }
 	}
 

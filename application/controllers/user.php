@@ -10,6 +10,8 @@
 			$this->load->library('session');
 			$this->load->database();
 			$this->load->model('user_model');
+			$this->load->model('sexes_model');
+			$this->load->model('country_model');
 	    }
 	
 	    function index() {
@@ -67,7 +69,9 @@
 	    }
 
 	    function register(){
-	    	$this->layout->view('/user/register');
+	    	$data['sexes_option'] = $this->sexes_model->get_assoc_array();
+	    	$data['country_option'] = $this->country_model->get_assoc_array();
+	    	$this->layout->view('/user/register',$data);
 	    }
 
 	    function checkRegister(){
@@ -84,7 +88,7 @@
 	    		} else {
 
 	    			$mail = $_POST['mail'];
-	    			$response_ml = $this->use_model->get($mail);
+	    			$response_ml = $this->user_model->get($mail);
 
 	    			if($response_ml){
 
