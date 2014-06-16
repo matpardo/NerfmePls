@@ -43,7 +43,7 @@
   <div class="container">
       <ol class="breadcrumb" style='text-align:right;'>
         <li><?php echo anchor('user/edit/'.$this->session->userdata('id'), 'Editar mis datos', array('title' => 'Editar información de mi perfil','class' => 'btn btn-link')); ?></li> 
-        <li><?php echo anchor('user/view/'.$this->session->userdata('id'), 'Ver mis datos', array('title' => 'Ver información personal','class' => 'btn btn-link')); ?></li> 
+        <li><?php echo anchor('user/profile_data/', 'Ver mis datos', array('title' => 'Ver información personal','class' => 'btn btn-link')); ?></li> 
       </ol>
      <?php echo $content_for_layout ?>   
   </div>
