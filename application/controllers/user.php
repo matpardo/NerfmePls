@@ -78,9 +78,11 @@
 
 	    function checkRegister(){
 	    	if($_POST){
-	    		$username = $_POST['username'];
+	    		$username = array(
+	    					'username' => $_POST['username']
+	    					);
 
-	    		$response_usr = $this->user_model->exist('username',$username);
+	    		$response_usr = $this->user_model->get_array($username);
 
 	    		if($response_usr){
 
@@ -89,8 +91,10 @@
 
 	    		} else {
 
-	    			$mail = $_POST['mail'];
-	    			$response_ml = $this->user_model->exist('mail',$mail);
+	    			$mail = array(
+	    					'mail' => $_POST['mail']
+	    					);
+	    			$response_ml = $this->user_model->get_array($mail);
 
 	    			if($response_ml){
 
@@ -98,6 +102,7 @@
 	    				$this->layout->view('/user/register',$data);
 
 	    			} else {
+	    				
 	    				array_pop($_POST);
 	    				$test = $this->user_model->insert($_POST);
 
@@ -109,7 +114,7 @@
 	    				} else {
 
 	    					$data['error'] = 0;
-	    					$this->layout->view('/user/register',$data);
+	    					$this->layout->view('/user/register_success',$data);
 	    					
 	    				}
 	    			}
