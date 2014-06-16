@@ -10,16 +10,11 @@
 	    function index() {
 			//Titulo de la página de la vista
 			$data['title_for_layout'] = 'Bienvenido';
-
-			$user = $this->session->all_userdata();
-			
-			echo '<pre>'. print_r($user,1).'</pre>'; die;
-
+						
 			$this->load->model('Element_model','Element',TRUE);
-			echo '<pre>'. print_r($this->Element->get(),1).'</pre>';
-			
-			//echo '<pre>'. print_r($this->Element->get(),1).'</pre>';	        
-	        $this->layout->view('/Element/test',$data);
+			$data['elements'] = $this->Element->get_3_best($this->session->userdata('visit_id'));
+						
+	        $this->layout->view('/Element/index',$data);
 	    }
 	}
 	        

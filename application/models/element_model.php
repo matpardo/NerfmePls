@@ -45,6 +45,29 @@ class Element_model extends CI_Model {
     }
 
     /**
+     * [get_3 description]
+     * @param  [type] $where [description]
+     * @return [type]        [description]
+     */
+    public function get_3_best($visit_id = NULL) {
+        $query = '(SELECT *,COUNT(*) as count from elements INNER JOIN users_elements on elements.id = users_elements.elements_id WHERE country_id = ? AND section_id = 1 GROUP BY elements_id ORDER BY count desc LIMIT 3)
+                    UNION ALL
+                  (SELECT *,COUNT(*) as count from elements INNER JOIN users_elements on elements.id = users_elements.elements_id WHERE country_id = ? AND section_id = 2 GROUP BY elements_id ORDER BY count desc LIMIT 3)
+                    UNION ALL
+                  (SELECT *,COUNT(*) as count from elements INNER JOIN users_elements on elements.id = users_elements.elements_id WHERE country_id = ? AND section_id = 3 GROUP BY elements_id ORDER BY count desc LIMIT 3)';
+        
+        $result = $this->db->query($query,array($visit_id,$visit_id,$visit_id));
+        
+        $aux = array();
+
+        foreach ($result->result_array() as $row) {
+            $aux[$row['section_id']][] = $row;
+        }
+
+        return $aux;
+    }
+
+    /**
      * Inserts new data into database
      *
      * @param Array $data Associative array with field_name=>value pattern to be inserted into database
