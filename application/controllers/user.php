@@ -77,6 +77,8 @@
 	    }
 
 	    function checkRegister(){
+	    	$data['sexes_option'] = $this->sexes_model->get_assoc_array();
+	    	$data['country_option'] = $this->country_model->get_assoc_array();
 	    	if($_POST){
 	    		$username = array(
 	    					'username' => $_POST['username']
@@ -102,7 +104,7 @@
 	    				$this->layout->view('/user/register',$data);
 
 	    			} else {
-	    				
+
 	    				array_pop($_POST);
 	    				$test = $this->user_model->insert($_POST);
 
@@ -114,7 +116,7 @@
 	    				} else {
 
 	    					$data['error'] = 0;
-	    					$this->layout->view('/user/register_success',$data);
+	    					$this->layout->view('/user/register',$data);
 	    					
 	    				}
 	    			}
