@@ -142,19 +142,18 @@ class User_model extends CI_Model {
 
     function changeField($id,$field,$value){
         $control = TRUE;
-        if($field == 'username' || $field == 'mail'){
-            $sql = "SELECT id
-                FROM users
-                WHERE '$field' = '$value'";
-            $qry = $this->db->query($sql);
-            $result = $qry->result_array();
+        $data = array(
+                $field => $value
+                );
+        if(isset($data['username']) || isset($data['mail'])){
+            $this->db->select('*');
+            $this->db->from(self::TABLE_NAME);
+            $this->db->where($field, $value);
+            $result = $this->db->get()->result_array();
             if($result)
                 $control = FALSE;
         }
         if($control){
-            $data = array(
-                $field => $value
-                );
              $this->db->where('id', $id);
              $this->db->update(self::TABLE_NAME,$data);
         }     
