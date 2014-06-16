@@ -24,7 +24,7 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><?php echo anchor('user/login/', 'Iniciar Sesión', array('title' => 'Iniciar Sesión','class' => 'btn btn-link')); ?></li>          
+          <li class="active"><?php echo anchor('user/', 'Iniciar Sesión', array('title' => 'Iniciar Sesión','class' => 'btn btn-link')); ?></li>          
         </ul>
       </div><!--/.nav-collapse -->
     </div>

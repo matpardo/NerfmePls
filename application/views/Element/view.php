@@ -81,24 +81,5 @@
    </div>
  </div>
  <script>
-      $(document).ready(function(){
-        $("#swaform").submit(function(event) {
-          var data = {content : $('#content').val(), element_id_like : $('#element_id_like').val()};
-            event.preventDefault();
-            bootbox.alert("Se ha enviado exitosamente su formulario", function() {
-             $.post("../process_likes", data, function(){              
-                 });
-            location.reload()       
-          });     
-        });
-        $("#likesform").submit(function(event) {
-          var data = {element_id : $('#element_id').val()};
-            event.preventDefault();
-            bootbox.alert("Se ha enviado exitosamente su formulario", function() {
-             $.post("../process_comments", data, function(){              
-                 });
-            location.reload()       
-          });     
-        });
-      });
+      
   </script>

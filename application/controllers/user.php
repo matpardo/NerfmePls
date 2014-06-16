@@ -71,6 +71,7 @@
 	    }
 
 	    function register(){
+	    	$this->layout->setLayout('layout_login');
 	    	$data['sexes_option'] = $this->sexes_model->get_assoc_array();
 	    	$data['country_option'] = $this->country_model->get_assoc_array();
 	    	$this->layout->view('/user/register',$data);
