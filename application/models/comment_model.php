@@ -69,7 +69,7 @@ class Comment_model extends CI_Model {
      * @return [type]     [description]
      */
     public function get_comments($id = NULL) {
-        $sql = 'SELECT * FROM comments INNER JOIN users ON comments.user_id = users.id WHERE comments.element_id = ?';
+        $sql = 'SELECT * FROM comments INNER JOIN users ON comments.user_id = users.id WHERE comments.element_id = ? ORDER BY comments.created desc';
         
         $result = $this->db->query($sql,array($id))->result_array();
         if ($result) {

@@ -88,6 +88,7 @@
 	    function process_comments(){
 	    	$data = $_POST;
 	    	$data['user_id'] = $this->session->userdata('id');
+	    	$data['created'] = date("Y-m-d H:i:s");
 
 	    	$this->load->model('Comment_model','Comment',TRUE);
 	    	

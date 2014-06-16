@@ -6,9 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo 'Iniciar Sesión';?></title>
 
-    <?php echo link_tag('assets/css/bootstrap.min.css'); ?>
+   <?php echo link_tag('assets/css/bootstrap.min.css'); ?>
     <?php echo link_tag('assets/css/home.css'); ?>
     <?php echo link_tag('assets/css/font-awesome.min.css'); ?>
+    <?php echo link_tag('assets/css/select2-bootstrap.css'); ?>
+    <?php echo link_tag('assets/css/select2.css'); ?>
+    <?php echo link_tag('assets/css/datepicker.css'); ?>
+    
+    <?php echo script_tag('assets/js/jquery-2.1.0.min.js'); ?>
+    <?php echo script_tag('assets/js/bootstrap.min.js'); ?>
+    <?php echo script_tag('assets/js/bootbox.min.js'); ?>
+    <?php echo script_tag('assets/js/select2.min.js'); ?>
+    <?php echo script_tag('assets/js/select2_locale_es.js'); ?>
+    <?php echo script_tag('assets/js/bootstrap-datepicker.js'); ?>
     
   </head>
   <body> 
@@ -45,9 +55,6 @@
   </div>
 </div>
 
-<?php echo script_tag('assets/js/jquery-2.1.0.min.js'); ?>
-<?php echo script_tag('assets/js/bootstrap.min.js'); ?>
-<?php echo script_tag('assets/js/bootbox.min.js'); ?>
 
 </body>
 </html>
