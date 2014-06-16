@@ -5,7 +5,7 @@ class Element_model extends CI_Model {
     /**
      * @name string TABLE_NAME Holds the name of the table in use by this model
      */
-    const TABLE_NAME = 'users';
+    const TABLE_NAME = 'elements';
 
     /**
      * @name string PRI_INDEX Holds the name of the tables' primary index used in this model
@@ -32,7 +32,7 @@ class Element_model extends CI_Model {
                 $this->db->where(self::PRI_INDEX, $where);
             }
         }
-        $result = $this->db->get()->result();
+        $result = $this->db->get()->result_array();
         if ($result) {
             if ($where !== NULL) {
                 return array_shift($result);
@@ -108,6 +108,12 @@ class Element_model extends CI_Model {
         }
         $this->db->delete(self::TABLE_NAME, $where);
         return $this->db->affected_rows();
+    }
+
+    public function exist($id = null){
+        $sql = 'SELECT * FROM elements WHERE elements.id = ?';
+        $query = $this->db->query($sql, array($id));   
+        return $query->num_rows();
     }
 }
 

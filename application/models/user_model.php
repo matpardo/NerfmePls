@@ -107,6 +107,38 @@ class User_model extends CI_Model {
         else
             return null;
     }
+
+    /**
+     * Retrieves record(s) from the database as an array
+     *
+     * @param mixed $where Optional. Retrieves only the records matching given criteria, or all records if not given.
+     *                      If associative array is given, it should fit field_name=>value pattern.
+     *                      If string, value will be used to match against PRI_INDEX
+     * @return mixed Single record if ID is given, or array of results
+     */
+    public function get_array($where = NULL) {
+        $this->db->select('*');
+        $this->db->from(self::TABLE_NAME);
+        if ($where !== NULL) {
+            if (is_array($where)) {
+                foreach ($where as $field=>$value) {
+                    $this->db->where($field, $value);
+                }
+            } else {
+                $this->db->where(self::PRI_INDEX, $where);
+            }
+        }
+        $result = $this->db->get()->result_array();
+        if ($result) {
+            if ($where !== NULL) {
+                return array_shift($result);
+            } else {
+                return $result;
+            }
+        } else {
+            return false;
+        }
+    }
 }
 
      
