@@ -141,6 +141,8 @@
 	    	$userdata = $this->session->all_userdata();
 	    	if(isset($userdata['id'])){
 	    		$data = $this->user_model->get_array($userdata['id']);
+	    		$data['sexes_option'] = $this->sexes_model->get_assoc_array();
+	    		$data['country_option'] = $this->country_model->get_assoc_array();
 	    		$data['sex_name']=$this->sexes_model->get_assoc_array()[$data['sex_id']];
 	    		$data['country_name']=$this->country_model->get_assoc_array()[$data['country_id']];
 	    		$this->layout->view('/user/profile',$data);
@@ -151,9 +153,36 @@
 	    	}
 	    }
 
-	    function changePass(){
+	    function changeField(){
 	    	if($_POST){
-	    		$this->user_model->changePass($_POST['id'],$_POST['password']);
+	    		$this->user_model->changeField($_POST['id'],$_POST['field'],$_POST['value']);
+	    		$response = $this->user_model->get_array(array('id'=>($_POST['id'])));
+	    		if($response != null){
+	    		//obtenemos el ip del visitante
+				//$ip = $_SERVER['REMOTE_ADDR'];
+				//de prueba pondremos una ip chilena
+				$ip='200.9.100.75';
+				$location = json_decode(file_get_contents('http://freegeoip.net/json/'.$ip));
+				
+				//obtenemos el codigo de país
+				$country_code = $location->country_code;
+				$this->load->model('Country_model','Country',TRUE);
+
+				$visit_id = $this->Country->get_country_id($country_code);
+				
+	    		$data = array(
+	    				'id' => $response['id'],
+	    				'group_id' => $response['group_id'],
+	    				'country_id' => $response['country_id'],
+	    				'name' => $response['name'],
+	    				'lastname_f' => $response['lastname_f'],
+	    				'lastname_m' => $response['lastname_m'],
+	    				'visit_id' => $visit_id);
+
+	    		$this->session->set_userdata($data);
+
+	    		$data = $this->session->all_userdata();
+	    		}
 	    	}
 	    	redirect('/user/profile_data', 'refresh');
 	    }

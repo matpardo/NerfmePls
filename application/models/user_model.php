@@ -140,12 +140,24 @@ class User_model extends CI_Model {
         }
     }
 
-    function changePass($id,$password){
-        $data = array(
-                'password' => $password
+    function changeField($id,$field,$value){
+        $control = TRUE;
+        if($field == 'username' || $field == 'mail'){
+            $sql = "SELECT id
+                FROM users
+                WHERE '$field' = '$value'";
+            $qry = $this->db->query($sql);
+            $result = $qry->result_array();
+            if($result)
+                $control = FALSE;
+        }
+        if($control){
+            $data = array(
+                $field => $value
                 );
-        $this->db->where('id', $id);
-        $this->db->update(self::TABLE_NAME,$data);
+             $this->db->where('id', $id);
+             $this->db->update(self::TABLE_NAME,$data);
+        }     
     }
 
     public function get_assoc_array_travelers(){
