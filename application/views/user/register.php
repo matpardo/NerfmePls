@@ -34,12 +34,12 @@
 		<?php
 			echo form_open('User/checkRegister')."\n";
 			echo form_label('Usuario', 'usuario')."\n";
-			echo form_input('username')."\n";
+			echo form_input('username')."\n"."<br>";
 			echo form_label('Password', 'pass')."\n";
-			echo form_password('password')."\n";
+			echo form_password('password')."\n"."<br>";
 		
 	
-			echo form_submit('send', 'Log in');
+			echo form_submit('send', 'Registrar');
 			echo form_close();
 
 			echo "<br>";
