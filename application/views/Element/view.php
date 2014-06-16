@@ -5,7 +5,7 @@
 </div>  
 <div class="row">
   <div class="col-sm-6 col-sm-offset-1">
-    <img src="<?php echo 'files/'.$Element['section_id'].'/'.$Element['picture']; ?>" alt="<?php echo $Element['picture'] ?>" class="img-responsive" id='img-example' />            
+    <?php echo img(array('class' =>'img-responsive','src' =>'assets/files/uploads/'.$Element['picture'])) ?>
   </div>
   <div class="col-sm-4">
     <i><?php echo $Element['description'] ?></i>

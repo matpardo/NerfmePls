@@ -42,6 +42,7 @@
       <h2><?php echo 'No encontramos alguna recomendación para el lugar en el que te encuentras' ?></h2> <br/>
        Si quieres puedes agregar alguna reseña <?php echo anchor('element/add/', 'aquí', array('title' => 'Mas información del lugar','class' => 'btn btn-link')); ?>
     <?php endif ?>
-    
+   
+    Si quieres puedes aportar alguna reseña <?php echo anchor('element/add/', 'aquí', array('title' => 'Mas información del lugar','class' => 'btn btn-link')); ?> 
   </div>
 </div>

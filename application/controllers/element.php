@@ -17,6 +17,43 @@
 	        $this->layout->view('/Element/index',$data);
 	    }
 
+	    function add() {
+			//Titulo de la página de la vista
+			$data['title_for_layout'] = 'Bienvenido';
+						
+			$this->load->model('Country_model','Country',TRUE);
+						
+			$data['Countries'] = $this->Country->get_assoc_array();
+						
+	        $this->layout->view('/Element/add',$data);
+	    }
+
+	    function end_add(){
+	    	//echo '<pre>'. print_r($_FILES,1).'</pre>';
+	    	$data = $_POST;
+	    	
+	    	$data['user_id'] = $this->session->userdata('id');
+
+			$this->load->model('Element_model','Element',TRUE);						
+	        
+			$config['upload_path'] = './assets/files/uploads/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			
+			$this->load->library('upload', $config);
+
+			if ( ! $this->upload->do_upload())			{
+				$error = array('error' => $this->upload->display_errors());
+			
+			}
+			else{
+				$data_pic = array('upload_data' => $this->upload->data());
+				$data['picture'] = $data_pic['upload_data']['file_name'];
+			}	
+			$id = $this->Element->insert($data);						
+
+			redirect('/element/', 'refresh');
+	    }
+
 	    function view($id = null) {
 			$this->load->model('Element_model','Element',TRUE);
 	    	
@@ -53,7 +90,7 @@
 	    	$data['user_id'] = $this->session->userdata('id');
 
 	    	$this->load->model('Comment_model','Comment',TRUE);
-	    	//echo '<pre>'. print_r($data,1).'</pre>';	
+	    	
 	    	
 	    	$this->Comment->insert($data);
 
