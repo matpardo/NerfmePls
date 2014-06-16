@@ -140,19 +140,6 @@ class User_model extends CI_Model {
         }
     }
 
-    public function exist($fieldname,$value){
-        $sql = "SELECT id
-                FROM users
-                WHERE '$fieldname' = '$value'";
-        $qry = $this->db->query($sql);
-        $response = $qry->row_array();
-        if($response!=null){
-            return TRUE;
-        }
-        else
-            return FALSE;
-    }
-
     function changePass($id,$password){
         $data = array(
                 'password' => $password
