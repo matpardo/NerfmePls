@@ -16,7 +16,7 @@
 	
 	    function index() {
 	    	$data = $this->session->all_userdata();
-	    	if(isset($data['name'])){
+	    	if($this->session->userdata('id')){
 	    		redirect('/element/', 'refresh');
 	    	} else 
 	    		$this->layout->setLayout('layout_login');
@@ -71,7 +71,7 @@
 	    }
 
 	    function register(){
-	    	if(isset($data['name'])){
+	    	if($this->session->userdata('id')){
 	    		redirect('/element/', 'refresh');
 	    	}
 	    	$this->layout->setLayout('layout_login');
@@ -134,7 +134,7 @@
 	    }
 
 	    function profile_data(){
-	    	if(! isset($data['name'])){
+	    	if(! $this->session->userdata('id')){
 	    		redirect('/user/', 'refresh');
 	    	}
 
@@ -159,10 +159,10 @@
 	    }
 
 	    function admin(){
-	    	if(! isset($data['name'])){
+	    	if(! $this->session->userdata('id')){
 	    		redirect('/user/', 'refresh');
 	    	}
-	    	
+
 	    	$userdata = $this->session->all_userdata();
 	    	if(isset($userdata['id']) && isset($userdata['group_id']) && $userdata['group_id'] == 1){
 	    		$data['travelers_option'] = $this->user_model->get_assoc_array_travelers();

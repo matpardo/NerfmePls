@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>TravelSyst - Administrar</title>
-	</head>
-	<body>
+
 		Seleccione una acción.<br><br>
 		<?php
 			echo form_open('User/upgradeTraveler');
@@ -19,5 +13,3 @@
 			echo form_submit('send', 'Banear');
 			echo form_close();
 		?>
-	</body>
-</html>

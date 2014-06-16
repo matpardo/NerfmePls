@@ -8,7 +8,7 @@
 	    }
 	
 	    function index() {
-			if(! isset($data['name'])){
+			if(! ($this->session->userdata('id'))){
 	    		redirect('/user/', 'refresh');
 	    	}
 			//Titulo de la página de la vista
@@ -21,7 +21,7 @@
 	    }
 
 	    function add() {
-			if(! isset($data['name'])){
+			if(! ($this->session->userdata('id'))){
 	    		redirect('/user/', 'refresh');
 	    	}
 			//Titulo de la página de la vista
@@ -61,7 +61,7 @@
 	    }
 
 	    function view($id = null) {
-			if(! isset($data['name'])){
+			if(! ($this->session->userdata('id'))){
 	    		redirect('/user/', 'refresh');
 	    	}
 
@@ -120,7 +120,7 @@
 	    }
 
 	    function restaurant($country_id = null) {
-			if(! isset($data['name'])){
+			if(! ($this->session->userdata('id'))){
 	    		redirect('/user/', 'refresh');
 	    	}
 			//Titulo de la página de la vista
@@ -139,7 +139,7 @@
 	    }
 
 	    function rent($country_id = null) {
-			if(! isset($data['name'])){
+			if(! ($this->session->userdata('id'))){
 	    		redirect('/user/', 'refresh');
 	    	}
 			//Titulo de la página de la vista
@@ -158,7 +158,7 @@
 	    }
 
 	     function places($country_id = null) {
-			if(! isset($data['name'])){
+			if(! ($this->session->userdata('id'))){
 	    		redirect('/user/', 'refresh');
 	    	}
 			//Titulo de la página de la vista

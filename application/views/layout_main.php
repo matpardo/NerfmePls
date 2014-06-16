@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $title_for_layout ?></title>
+    <title><?php echo (isset($title_for_layout))?$title_for_layout:'Turismo' ?></title>
 
     <?php echo link_tag('assets/css/bootstrap.min.css'); ?>
     <?php echo link_tag('assets/css/home.css'); ?>
@@ -37,9 +37,9 @@
           <li><?php echo anchor('element/rent/', 'Hoteles/Alquileres', array('title' => 'Hoteles/Alquileres')); ?></li>
           <li><?php echo anchor('element/restaurant/', 'Restaurantes', array('title' => 'Restaurantes')); ?></li>
           
-          <?php //if ($_SESSION['Auth']['User']['group_id'] == 1): ?>
-          <li><a href="/user/admin">Administrar</a></li>  
-          <?php //endif ?>
+          <?php if ($this->session->userdata('group_id') == 1): ?>
+          <li><?php echo anchor('user/admin/', 'Administrar', array('title' => 'Administrar')); ?></li>
+          <?php endif ?>
           <li><?php echo anchor('user/logout/', 'Cerrar Sesión', array('title' => 'Cerrar Sesión','class' => 'btn btn-link')); ?></li>            
         </ul>
       </div><!--/.nav-collapse -->

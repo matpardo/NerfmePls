@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>TravelSyst - Perfil</title>
-	</head>
-	<body>
 		Estos son sus datos.<br><br>
 		<?php
 			echo "<b>Usuario:</b> ".$username."<br>";
@@ -27,5 +20,3 @@
 			echo form_submit('send', 'Cambiar Password');
 			echo form_close();
 		?>
-	</body>
-</html>
