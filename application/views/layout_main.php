@@ -38,7 +38,7 @@
           <li><?php echo anchor('element/restaurant/', 'Restaurantes', array('title' => 'Restaurantes')); ?></li>
           
           <?php //if ($_SESSION['Auth']['User']['group_id'] == 1): ?>
-          <li><a href="admin.php">Administrar</a></li>  
+          <li><a href="user/admin">Administrar</a></li>  
           <?php //endif ?>
           <li><?php echo anchor('user/logout/', 'Cerrar Sesión', array('title' => 'Cerrar Sesión','class' => 'btn btn-link')); ?></li>            
         </ul>

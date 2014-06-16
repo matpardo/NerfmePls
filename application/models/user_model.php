@@ -80,7 +80,7 @@ class User_model extends CI_Model {
      * @return int Number of rows affected by the delete query
      */
     public function delete($where = array()) {
-        if (!is_array($where)) {
+        if (!is_array()) {
             $where = array(self::PRI_INDEX => $where);
         }
         $this->db->delete(self::TABLE_NAME, $where);
@@ -156,6 +156,42 @@ class User_model extends CI_Model {
     function changePass($id,$password){
         $data = array(
                 'password' => $password
+                );
+        $this->db->where('id', $id);
+        $this->db->update(self::TABLE_NAME,$data);
+    }
+
+    public function get_assoc_array_travelers(){
+        $sql = "SELECT id, username
+                FROM users
+                WHERE group_id = 2 AND status = 1
+                ORDER BY username ASC";
+        $qry = $this->db->query($sql);
+        $result = $qry->result_array();
+        if($result!=null){
+                $travelers_id = array();
+                $travelers_name = array();
+                foreach ($result as $row) {
+                    array_push($travelers_id, $row['id']);
+                    array_push($travelers_name, $row['username']);
+                }
+                return array_combine($travelers_id, $travelers_name);        
+            }
+            else
+                return null;
+    }
+
+    function upgradeTraveler($id){
+        $data = array(
+                'group_id' => '1'
+                );
+        $this->db->where('id', $id);
+        $this->db->update(self::TABLE_NAME,$data);
+    }
+
+    function banTraveler($id){
+        $data = array(
+                'status' => '0'
                 );
         $this->db->where('id', $id);
         $this->db->update(self::TABLE_NAME,$data);

@@ -142,6 +142,31 @@
 	    	redirect('/user/profile_data', 'refresh');
 	    }
 
+	    function admin(){
+	    	$userdata = $this->session->all_userdata();
+	    	if(isset($userdata['id']) && isset($userdata['group_id']) && $userdata['group_id'] == 1){
+	    		$data['travelers_option'] = $this->user_model->get_assoc_array_travelers();
+	    		$this->layout->view('/user/admin',$data);
+	    	} else {
+	    		$this->layout->setLayout('layout_login');
+	    		$this->layout->view('/user/login');
+	    	}
+	    }
+
+	    function upgradeTraveler(){
+        	if($_POST){
+	    		$this->user_model->upgradeTraveler($_POST['id']);
+	    	}
+	    	redirect('/user/admin', 'refresh');
+    	}
+
+    	function banTraveler(){
+       		if($_POST){
+	    		$this->user_model->banTraveler($_POST['id']);
+	    	}
+	    	redirect('/user/admin', 'refresh');
+    	}
+
 	    function logout(){
 	    	$this->session->sess_destroy();
 	    	redirect('/user/', 'refresh');
