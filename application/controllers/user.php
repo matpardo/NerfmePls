@@ -107,6 +107,7 @@
 	    			} else {
 
 	    				array_pop($_POST);
+	    				$_POST['created'] = date('Y-m-d H:i:s');
 	    				$test = $this->user_model->insert($_POST);
 
 	    				if(!$test){
