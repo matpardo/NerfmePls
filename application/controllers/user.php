@@ -30,12 +30,23 @@
 	    }
 
 	    function checkLogin(){
+	    	if(empty($_POST)){
+	    		redirect('/user');
+	    	}
+
 	    	$user = $_POST['username'];
 	    	$pass = $_POST['password'];
 
 	    	$response = $this->user_model->check($user,$pass);
 
 	    	if($response != null){
+	    		if(! $response['status']){
+	    			$data['error'] = TRUE;
+	    			$data['message'] = 'Usuario Banneado!';
+		    		$this->layout->setLayout('layout_login');
+		    		$this->layout->view('/user/login',$data);
+		    		return;		    		
+	    		}
 	    		//obtenemos el ip del visitante
 				//$ip = $_SERVER['REMOTE_ADDR'];
 				//de prueba pondremos una ip chilena

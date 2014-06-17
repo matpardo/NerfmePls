@@ -11,12 +11,14 @@
     <?php echo link_tag('assets/css/font-awesome.min.css'); ?>
     <?php echo link_tag('assets/css/select2-bootstrap.css'); ?>
     <?php echo link_tag('assets/css/select2.css'); ?>
+    <?php echo link_tag('assets/css/datepicker.css'); ?>
     
     <?php echo script_tag('assets/js/jquery-2.1.0.min.js'); ?>
     <?php echo script_tag('assets/js/bootstrap.min.js'); ?>
     <?php echo script_tag('assets/js/bootbox.min.js'); ?>
     <?php echo script_tag('assets/js/select2.min.js'); ?>
     <?php echo script_tag('assets/js/select2_locale_es.js'); ?>
+    <?php echo script_tag('assets/js/bootstrap-datepicker.js'); ?>
   </head>
   <body> 
    <!-- Fixed navbar -->

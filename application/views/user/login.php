@@ -1,7 +1,9 @@
 <?php
-	if(isset($error) && $error == TRUE){
-		echo "El usuario no ha sido encontrado.<br>";
-	}
+	if(isset($error) && $error == TRUE){ ?>
+		<p class="bg-danger"> 
+			<?php echo (isset($message))? $message : "El usuario no ha sido encontrado."; ?>
+		</p>
+<?php	}
 ?>
 <div class="row">
 	<?php echo form_open('User/checkLogin')."\n"; ?>

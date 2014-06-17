@@ -96,11 +96,11 @@ class User_model extends CI_Model {
      */
     public function check($user, $pass){
 
-        $sql = "SELECT id,group_id,country_id,name,lastname_f,lastname_m
+        $sql = "SELECT id,group_id,country_id,name,lastname_f,lastname_m,status
                 FROM users
                 WHERE username = '$user' AND password = '$pass'";
         $qry = $this->db->query($sql);
-        $response = $qry->row_array();
+        $response = $qry->row_array();        
         if($response!=null){
             return $response;
         }
@@ -181,16 +181,15 @@ class User_model extends CI_Model {
 
     function upgradeTraveler($id){
         $data = array(
-                'group_id' => '1'
+                'group_id' => 1
                 );
         $this->db->where('id', $id);
         $this->db->update(self::TABLE_NAME,$data);
     }
 
     function banTraveler($id){
-        $data = array(
-                'status' => '0'
-                );
+        
+        $data = array('status' => 0);
         $this->db->where('id', $id);
         $this->db->update(self::TABLE_NAME,$data);
     }
